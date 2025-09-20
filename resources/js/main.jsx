@@ -1,14 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import { LanguageProvider } from './context/LanguageContext'
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import './App.css';
+import App from './App.jsx';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <LanguageProvider>
-      <App />
-    </LanguageProvider>
-  </React.StrictMode>,
-)
+// Initialize React application
+const container = document.getElementById('react-app');
+if (container) {
+    const root = createRoot(container);
+    root.render(<App />);
+} else {
+    console.error('React app container not found. Make sure there is an element with id="react-app" in your HTML.');
+}

@@ -35,6 +35,7 @@ const cartReducer = (state, action) => {
       };
 
     case CART_ACTIONS.FETCH_CART_SUCCESS:
+      saveCartToSession(action.payload);
       return {
         ...state,
         loading: false,
@@ -63,11 +64,21 @@ const cartReducer = (state, action) => {
     case CART_ACTIONS.ADD_TO_CART_SUCCESS:
     case CART_ACTIONS.UPDATE_CART_ITEM_SUCCESS:
     case CART_ACTIONS.REMOVE_FROM_CART_SUCCESS:
-    case CART_ACTIONS.CLEAR_CART_SUCCESS:
+      saveCartToSession(action.payload.cart);
       return {
         ...state,
         loading: false,
         cart: action.payload.cart,
+        message: action.payload.message,
+        error: null,
+      };
+
+    case CART_ACTIONS.CLEAR_CART_SUCCESS:
+      saveCartToSession(null);
+      return {
+        ...state,
+        loading: false,
+        cart: null,
         message: action.payload.message,
         error: null,
       };
@@ -95,10 +106,35 @@ const cartReducer = (state, action) => {
   }
 };
 
+// Session storage helpers
+const CART_STORAGE_KEY = 'lunar_gta_cart';
+
+const saveCartToSession = (cart) => {
+  try {
+    if (cart) {
+      sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    } else {
+      sessionStorage.removeItem(CART_STORAGE_KEY);
+    }
+  } catch (error) {
+    console.warn('Failed to save cart to session storage:', error);
+  }
+};
+
+const loadCartFromSession = () => {
+  try {
+    const savedCart = sessionStorage.getItem(CART_STORAGE_KEY);
+    return savedCart ? JSON.parse(savedCart) : null;
+  } catch (error) {
+    console.warn('Failed to load cart from session storage:', error);
+    return null;
+  }
+};
+
 // Initial cart state
 const initialCartState = {
   loading: false,
-  cart: null,
+  cart: loadCartFromSession(),
   error: null,
   message: null,
 };

@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
-import { AppProvider, useLanguage } from './src/context';
+import { AppProvider, useLanguage, useAuth } from './src/context';
 import { Suspense, lazy } from 'react';
 
 // Lazy load components
@@ -14,9 +14,17 @@ const SpareParts = lazy(() => import('./src/Pages/SpareParts'));
 const BlogPage = lazy(() => import('./src/Pages/Blog'));
 const Contact = lazy(() => import('./src/Pages/Contact'));
 
+// E-commerce pages (to be created)
+const ProductDetail = lazy(() => import('./src/Pages/ProductDetail'));
+const CartPage = lazy(() => import('./src/Pages/Cart'));
+const CheckoutPage = lazy(() => import('./src/Pages/Checkout'));
+const ProfilePage = lazy(() => import('./src/Pages/Profile'));
+const OrdersPage = lazy(() => import('./src/Pages/Orders'));
+const OrderConfirmationPage = lazy(() => import('./src/Pages/OrderConfirmation'));
+const AuthPage = lazy(() => import('./src/Pages/Auth'));
+
 // Import Shared Layout Components
 import Navbar from './src/components/Navbar/Navbar';
-// import Footer from './components/Footer/Footer'; // Assuming this exists
 
 // Loading Component
 const LoadingSpinner = () => (
@@ -27,13 +35,28 @@ const LoadingSpinner = () => (
   </div>
 );
 
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" replace />;
+  }
+  
+  return children;
+};
+
 // App Content Component
 const AppContent = () => {
   const { language } = useLanguage();
 
   return (
     <Router>
-      <div className={`app-container ${language}`}>
+      <div className={`app-container ${language}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
         <Navbar />
         
         <Routes>
@@ -49,10 +72,66 @@ const AppContent = () => {
             element={<Suspense fallback={<LoadingSpinner />}><About /></Suspense>} 
           />
           
-          {/* Spare Parts Route */}
+          {/* Spare Parts / Products Route */}
+          <Route 
+            path="/products" 
+            element={<Suspense fallback={<LoadingSpinner />}><SpareParts /></Suspense>} 
+          />
           <Route 
             path="/spare-parts" 
-            element={<Suspense fallback={<LoadingSpinner />}><SpareParts /></Suspense>} 
+            element={<Navigate to="/products" replace />} 
+          />
+          
+          {/* Product Detail Route */}
+          <Route 
+            path="/products/:slug" 
+            element={<Suspense fallback={<LoadingSpinner />}><ProductDetail /></Suspense>} 
+          />
+          
+          {/* Cart Route */}
+          <Route 
+            path="/cart" 
+            element={<Suspense fallback={<LoadingSpinner />}><CartPage /></Suspense>} 
+          />
+          
+          {/* Auth Routes */}
+          <Route 
+            path="/auth/:type" 
+            element={<Suspense fallback={<LoadingSpinner />}><AuthPage /></Suspense>} 
+          />
+          
+          {/* Protected Routes */}
+          <Route 
+            path="/checkout" 
+            element={
+              <ProtectedRoute>
+                <Suspense fallback={<LoadingSpinner />}><CheckoutPage /></Suspense>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/profile" 
+            element={
+              <ProtectedRoute>
+                <Suspense fallback={<LoadingSpinner />}><ProfilePage /></Suspense>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/orders" 
+            element={
+              <ProtectedRoute>
+                <Suspense fallback={<LoadingSpinner />}><OrdersPage /></Suspense>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/order-confirmation/:orderId" 
+            element={
+              <ProtectedRoute>
+                <Suspense fallback={<LoadingSpinner />}><OrderConfirmationPage /></Suspense>
+              </ProtectedRoute>
+            } 
           />
           
           {/* Blog Route */}
@@ -65,6 +144,18 @@ const AppContent = () => {
           <Route 
             path="/contact" 
             element={<Suspense fallback={<LoadingSpinner />}><Contact /></Suspense>} 
+          />
+          
+          {/* Search Route */}
+          <Route 
+            path="/search" 
+            element={<Suspense fallback={<LoadingSpinner />}><SpareParts /></Suspense>} 
+          />
+          
+          {/* Collections Route */}
+          <Route 
+            path="/collections/:slug" 
+            element={<Suspense fallback={<LoadingSpinner />}><SpareParts /></Suspense>} 
           />
           
           {/* Redirect from old .html routes */}
@@ -117,7 +208,7 @@ const NotFound = ({ language }) => {
         className="btn btn-primary"
         onClick={() => window.location.href = '/'}
       >
-        {language === 'ar' ? 'العودة لل首页' : 'Go to Home'}
+        {language === 'ar' ? 'العودة للرئيسية' : 'Go to Home'}
       </button>
     </div>
   );

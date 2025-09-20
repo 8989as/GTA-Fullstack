@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar/Navbar";
 import Header from "../components/HomePage/Header/Header";
 import LogoSlider from '../components/HomePage/LogoSlider/LogoSlider';
 import Services from "../components/HomePage/Services/Services";
@@ -25,7 +24,6 @@ const Homepage = () => {
 
   return (
     <div>
-      <Navbar />
       <Header />
       <LogoSlider logos={BrandLogos} interval={3000} itemsPerSlide={3} />
       <Services />

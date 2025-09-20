@@ -1,0 +1,259 @@
+/* Order Confirmation Page Styles */
+
+.order-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Success Card Styling */
+.card.border-success {
+  border-width: 2px !important;
+}
+
+.card.border-success .card-body {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Order Status Badge */
+.badge.fs-6 {
+  font-size: 0.875rem !important;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+}
+
+/* Table Styling */
+.table-borderless th {
+  border: none;
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table-borderless td {
+  border: none;
+  padding: 1rem 0.75rem;
+  vertical-align: middle;
+}
+
+.table-borderless tbody tr {
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.table-borderless tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Address Styling */
+address {
+  line-height: 1.6;
+  color: #495057;
+}
+
+address strong {
+  color: #212529;
+  font-weight: 600;
+}
+
+/* Order Summary Card */
+.card .card-header h6 {
+  color: #495057;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Next Steps Icons */
+.bi {
+  font-size: 1.25rem;
+}
+
+/* Success Icon Animation */
+.bi-check-circle {
+  animation: successPulse 2s ease-in-out;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Button Hover Effects */
+.btn-outline-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 34, 170, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Card Hover Effects */
+.card {
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-item-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+  
+  .display-1 {
+    font-size: 4rem !important;
+  }
+  
+  .d-flex.gap-3.flex-wrap {
+    flex-direction: column;
+  }
+  
+  .d-flex.gap-3.flex-wrap .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-body.py-5 {
+    padding: 2rem 1rem !important;
+  }
+  
+  .display-1 {
+    font-size: 3rem !important;
+  }
+  
+  .fs-5 {
+    font-size: 1rem !important;
+  }
+  
+  .table-responsive table {
+    font-size: 0.8rem;
+  }
+  
+  .order-item-image {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .order-item-image {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .bi {
+  margin-left: 0.75rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .me-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"] .me-3 {
+  margin-left: 1rem !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"] .ms-1 {
+  margin-right: 0.25rem !important;
+  margin-left: 0 !important;
+}
+
+[dir="rtl"] .text-end {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-start {
+  text-align: left !important;
+}
+
+/* LTR specific styles */
+[dir="ltr"] .order-item-image {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+
+/* Print Styles */
+@media print {
+  .btn,
+  .card-header,
+  .breadcrumb {
+    display: none !important;
+  }
+  
+  .card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  .page-break {
+    page-break-before: always;
+  }
+}
+
+/* Loading States */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Error States */
+.error-message {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+/* Success States */
+.success-message {
+  background: #d1edff;
+  border: 1px solid #b8daff;
+  color: #004085;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+}

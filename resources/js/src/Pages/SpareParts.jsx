@@ -1,6 +1,5 @@
 import React from "react";
 import { useLanguage } from "../context";
-import Navbar from "../components/Navbar/Navbar";
 import PageHeader from "../components/PageHeader/PageHeader";
 import Sidebar from "../components/SpareParts/Sidebar/Sidebar";
 import Products from "../components/SpareParts/Products/Products";
@@ -15,7 +14,6 @@ const SpareParts = () => {
 
   return (
     <div dir={language === "ar" ? "rtl" : "ltr"}>
-      <Navbar />
       <PageHeader
         title={language === 'ar' ? 'قطع الغيار' : 'Spare Parts'}
         breadcrumbs={breadcrumbs}

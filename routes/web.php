@@ -1,12 +1,6 @@
 <?php
 
-use App\Livewire\CheckoutPage;
-use App\Livewire\CheckoutSuccessPage;
-use App\Livewire\CollectionPage;
-use App\Livewire\Home;
-use App\Livewire\ProductPage;
-use App\Livewire\SearchPage;
-use Illuminate\Support\Facades\Route;
+use Illuminate\support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Home::class);
-
-Route::get('/collections/{slug}', CollectionPage::class)->name('collection.view');
-
-Route::get('/products/{slug}', ProductPage::class)->name('product.view');
-
-Route::get('search', SearchPage::class)->name('search.view');
-
-Route::get('checkout', CheckoutPage::class)->name('checkout.view');
-
-Route::get('checkout/success', CheckoutSuccessPage::class)->name('checkout-success.view');
+// Serve React SPA for all routes
+// The React Router will handle client-side routing
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');

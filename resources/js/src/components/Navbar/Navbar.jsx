@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import { useLanguage } from "../../context/LanguageContext";
+import { useNavigate, Link } from 'react-router-dom';
+import { useLanguage, useAuth, useCart } from "../../context";
 import "./Navbar.css";
 
 const Navbar = () => {
   const { language, toggleLanguage } = useLanguage();
+  const { isAuthenticated, user, logout } = useAuth();
+  const { getCartItemsCount } = useCart();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileNavActive, setIsMobileNavActive] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   // Handle scroll effect
   useEffect(() => {
@@ -34,28 +37,26 @@ const Navbar = () => {
     setIsMobileNavActive(!isMobileNavActive);
   };
 
-  // Handle nav link click
-  const handleNavLinkClick = (e, path) => {
-    e.preventDefault();
-    handleMobileNavToggle(); // Close mobile menu
-    navigate(path);
+  // Handle user logout
+  const handleLogout = async () => {
+    await logout();
+    setShowUserDropdown(false);
+    navigate('/');
   };
+
+  const cartItemsCount = getCartItemsCount();
 
   return (
     <div className={`navbar fixed-top d-flex align-items-center ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
-        <a 
-          href="/" 
-          className="navbar-brand d-flex align-items-center" 
-          onClick={(e) => handleNavLinkClick(e, '/')}
-        >
+        <Link to="/" className="navbar-brand d-flex align-items-center">
           <img 
             src="/assets/images/logo.svg" 
             alt="Logo" 
             className={language === 'ar' ? 'ms-2' : 'me-2'}
             style={{ width: "125px", height: "35px" }} 
           />
-        </a>
+        </Link>
 
         <nav id="navmenu" className={`navbar navbar-expand-xl ${isMobileNavActive ? 'mobile-nav-active' : ''}`}>
           <button
@@ -72,80 +73,120 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a 
-                  className="nav-link active" 
-                  aria-current="page" 
-                  href="index.html"
-                  onClick={(e) => handleNavLinkClick(e, '/')}
-                >
+                <Link className="nav-link" to="/">
                   {language === 'ar' ? 'الرئيسية' : 'Home'}
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a 
-                  className="nav-link" 
-                  href="about.html"
-                  onClick={(e) => handleNavLinkClick(e, '/about')}
-                >
+                <Link className="nav-link" to="/about">
                   {language === 'ar' ? 'عن الشركة' : 'About'}
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a 
-                  className="nav-link" 
-                  href="services.html"
-                  onClick={(e) => handleNavLinkClick(e, '/services')}
-                >
-                  {language === 'ar' ? 'خدماتنا' : 'Services'}
-                </a>
-              </li>
-              <li className="nav-item">
-                <a 
-                  className="nav-link" 
-                  href="spare-parts.html"
-                  onClick={(e) => handleNavLinkClick(e, '/spare-parts')}
-                >
+                <Link className="nav-link" to="/products">
                   {language === 'ar' ? 'قطع الغيار' : 'Spare Parts'}
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a 
-                  className="nav-link" 
-                  href="portfolio.html"
-                  onClick={(e) => handleNavLinkClick(e, '/portfolio')}
-                >
-                  {language === 'ar' ? 'أعمالنا' : 'Portfolio'}
-                </a>
-              </li>
-              <li className="nav-item">
-                <a 
-                  className="nav-link" 
-                  href="blog.html"
-                  onClick={(e) => handleNavLinkClick(e, '/blog')}
-                >
+                <Link className="nav-link" to="/blog">
                   {language === 'ar' ? 'المدونة' : 'Blog'}
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a 
-                  className="nav-link" 
-                  href="contact.html"
-                  onClick={(e) => handleNavLinkClick(e, '/contact')}
-                >
+                <Link className="nav-link" to="/contact">
                   {language === 'ar' ? 'اتصل بنا' : 'Contact'}
-                </a>
+                </Link>
               </li>
             </ul>
 
-            <div className={`lang-switcher ${language === 'ar' ? 'me-3' : 'ms-3'}`}>
-              <select 
-                value={language} 
-                onChange={handleLanguageChange}
-                className="form-select form-select-sm"
-              >
-                <option value="en">English</option>
-                <option value="ar">العربية</option>
-              </select>
+            {/* Cart and Auth Section */}
+            <div className="d-flex align-items-center ms-3">
+              {/* Cart Icon */}
+              <Link to="/cart" className="btn btn-outline-primary position-relative me-2">
+                <i className="bi bi-cart"></i>
+                {cartItemsCount > 0 && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {cartItemsCount}
+                  </span>
+                )}
+              </Link>
+
+              {/* Authentication Section */}
+              {isAuthenticated ? (
+                <div className="dropdown">
+                  <button 
+                    className="btn btn-outline-primary dropdown-toggle"
+                    type="button"
+                    onClick={() => setShowUserDropdown(!showUserDropdown)}
+                  >
+                    <i className="bi bi-person"></i>
+                    <span className="ms-1 d-none d-md-inline">
+                      {user?.name || (language === 'ar' ? 'المستخدم' : 'User')}
+                    </span>
+                  </button>
+                  {showUserDropdown && (
+                    <ul className="dropdown-menu dropdown-menu-end show">
+                      <li>
+                        <Link 
+                          className="dropdown-item" 
+                          to="/profile"
+                          onClick={() => setShowUserDropdown(false)}
+                        >
+                          <i className="bi bi-person me-2"></i>
+                          {language === 'ar' ? 'الملف الشخصي' : 'Profile'}
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          className="dropdown-item" 
+                          to="/orders"
+                          onClick={() => setShowUserDropdown(false)}
+                        >
+                          <i className="bi bi-bag me-2"></i>
+                          {language === 'ar' ? 'طلباتي' : 'My Orders'}
+                        </Link>
+                      </li>
+                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <button 
+                          className="dropdown-item text-danger" 
+                          onClick={handleLogout}
+                        >
+                          <i className="bi bi-box-arrow-right me-2"></i>
+                          {language === 'ar' ? 'تسجيل الخروج' : 'Logout'}
+                        </button>
+                      </li>
+                    </ul>
+                  )}
+                </div>
+              ) : (
+                <div className="d-flex gap-2">
+                  <Link to="/auth/login" className="btn btn-outline-primary">
+                    <i className="bi bi-box-arrow-in-right"></i>
+                    <span className="ms-1 d-none d-md-inline">
+                      {language === 'ar' ? 'دخول' : 'Login'}
+                    </span>
+                  </Link>
+                  <Link to="/auth/register" className="btn btn-primary">
+                    <i className="bi bi-person-plus"></i>
+                    <span className="ms-1 d-none d-md-inline">
+                      {language === 'ar' ? 'تسجيل' : 'Register'}
+                    </span>
+                  </Link>
+                </div>
+              )}
+
+              {/* Language Switcher */}
+              <div className={`lang-switcher ${language === 'ar' ? 'me-3' : 'ms-3'}`}>
+                <select 
+                  value={language} 
+                  onChange={handleLanguageChange}
+                  className="form-select form-select-sm"
+                >
+                  <option value="en">English</option>
+                  <option value="ar">العربية</option>
+                </select>
+              </div>
             </div>
           </div>
         </nav>
