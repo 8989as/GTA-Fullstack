@@ -1,0 +1,110 @@
+.services-section {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+
+/* Direction-specific adjustments */
+[dir="rtl"] .service-content {
+  right: 24px;
+  left: 24px;
+  text-align: right;
+}
+
+[dir="ltr"] .service-content {
+  left: 24px;
+  right: 24px;
+  text-align: left;
+}
+
+[dir="rtl"] .service-content p {
+  text-align: right;
+}
+
+[dir="ltr"] .service-content p {
+  text-align: left;
+}
+
+.service-title {
+  color: #1E22AA;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 49.6px;
+}
+
+.service-card {
+  position: relative;
+  height: 422px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.service-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover img {
+  transform: scale(1.05);
+}
+
+.service-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.33);
+  border-radius: 8px;
+  backdrop-filter: blur(2.5px);
+  transition: background 0.3s ease;
+}
+
+.service-card:hover .overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.service-content {
+  position: absolute;
+  bottom: 32px;
+  right: 24px;
+  left: 24px;
+  z-index: 1;
+  text-align: right;
+  transition: transform 0.3s ease;
+}
+
+.service-content h3 {
+  color: #E9E9F7;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 57.6px;
+  margin-bottom: 12px;
+  transition: margin-bottom 0.3s ease;
+}
+
+.service-content p {
+  color: #EAEAEA;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25.6px;
+  text-align: justify;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  height: 0;
+  overflow: hidden;
+}
+
+.service-card:hover .service-content p {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+  margin-top: 12px;
+}
+
+.service-card:hover .service-content {
+  transform: translateY(-10px);
+}

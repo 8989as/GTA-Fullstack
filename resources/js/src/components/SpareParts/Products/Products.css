@@ -1,0 +1,201 @@
+.products-grid {
+  width: 100%;
+}
+
+.product-card {
+  width: 100%;
+}
+
+.product-card .card {
+  border-radius: 8px;
+  border: 1px solid var(--Grey-grey-500, #D1D1D1);
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.product-image-section {
+  background: var(--Grey-grey-100, #F1F1F1);
+  border-radius: 8px 8px 0 0;
+}
+
+/* Discount Badge */
+.discount-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 3px 7px;
+  background: var(--Error-error-500, #DA2222);
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Noto Kufi Arabic';
+  text-align: center;
+}
+
+/* Action Buttons */
+.action-buttons {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-btn {
+  width: 36px;
+  height: 35px;
+  padding: 10px;
+  border: 1px solid var(--Grey-grey-600, #BEBEBE);
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background: var(--Primary-primary-500, #1E22AA);
+  border-color: var(--Primary-primary-500, #1E22AA);
+  color: white;
+}
+
+/* Product Info */
+.product-category {
+  color: var(--Grey-grey-700, #949494);
+  font-size: 12px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 500;
+  line-height: 12px;
+  margin-bottom: 4px;
+}
+
+.product-title {
+  color: var(--Primary-primary-500, #1E22AA);
+  font-size: 18px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 700;
+  line-height: 25.92px;
+  margin-bottom: 8px;
+}
+
+.product-description {
+  color: var(--Grey-grey-900, #585858);
+  font-size: 14px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 400;
+  line-height: 21.28px;
+}
+
+/* Brand and Price */
+.brand-logo-wrapper {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #E0E0E0;
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.product-price {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.price-value {
+  color: var(--Secondary-secondary-500, #DA291C);
+  font-size: 40px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 700;
+  line-height: 57.6px;
+}
+
+/* Add to Cart Button */
+.add-to-cart-btn {
+  background: var(--Primary-primary-500, #1E22AA);
+  padding: 12px 24px;
+  font-size: 16px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.add-to-cart-btn:hover {
+  background: #181b8a;
+}
+
+/* RTL Support */
+[dir="rtl"] .product-card {
+  text-align: right;
+}
+
+[dir="rtl"] .discount-badge {
+  right: 16px;
+  left: auto;
+}
+
+[dir="rtl"] .action-buttons {
+  left: 16px;
+  right: auto;
+}
+
+[dir="rtl"] .product-info {
+  text-align: right;
+}
+
+[dir="rtl"] .product-footer {
+  direction: rtl;
+}
+
+[dir="rtl"] .price-value {
+  direction: ltr;
+  display: inline-block;
+}
+
+[dir="rtl"] .add-to-cart-btn i {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .product-price {
+  flex-direction: row-reverse;
+}
+
+/* LTR specific styles */
+[dir="ltr"] .product-card {
+  text-align: left;
+}
+
+[dir="ltr"] .discount-badge {
+  left: 16px;
+  right: auto;
+}
+
+[dir="ltr"] .action-buttons {
+  right: 16px;
+  left: auto;
+}
+
+[dir="ltr"] .product-info {
+  text-align: left;
+}
+
+[dir="ltr"] .add-to-cart-btn i {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .price-value {
+    font-size: 32px;
+    line-height: 46px;
+  }
+}

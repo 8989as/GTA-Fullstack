@@ -1,0 +1,228 @@
+.sidebar-filter {
+  width: 302px;
+  border: 1px solid var(--Grey-grey-500, #D1D1D1);
+}
+
+.filter-title {
+  color: var(--Primary-primary-500, #1E22AA);
+  font-size: 18px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 700;
+  line-height: 25.92px;
+}
+
+.filter-subtitle {
+  color: var(--Grey-grey-900, #585858);
+  font-size: 12px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 700;
+  line-height: 12px;
+}
+
+/* Car Brand Grid */
+.car-brands-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.car-brand-item {
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.car-brand-item:hover,
+.car-brand-item.selected {
+  background: var(--Grey-grey-50, #FAFAFA);
+  border: 1px solid var(--Grey-grey-500, #D1D1D1);
+}
+
+.brand-logo {
+  width: 65px;
+  height: 43px;
+  object-fit: contain;
+}
+
+/* Model Dropdown */
+.form-select {
+  padding: 10px;
+  background: white;
+  border: 1px solid #E8E8E8;
+  border-radius: 6px;
+  color: var(--Grey-grey-600, #BEBEBE);
+  font-size: 14px;
+  font-family: 'Noto Kufi Arabic';
+  line-height: 21.28px;
+}
+
+/* Year Badges */
+.year-badges {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.year-badge {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--Grey-grey-200, #E8E8E8);
+  text-align: center;
+  cursor: pointer;
+  color: var(--Grey-grey-900, #585858);
+  font-size: 14px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 500;
+  line-height: 14px;
+  transition: all 0.2s ease;
+}
+
+.year-badge:hover,
+.year-badge.selected {
+  background: var(--Grey-grey-50, #FAFAFA);
+  border: 1px solid var(--Grey-grey-500, #D1D1D1);
+}
+
+/* Part Type Radio Buttons */
+.part-type-selection {
+  display: flex;
+  gap: 8px;
+}
+
+.radio-option {
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.radio-option.selected {
+  background: var(--Primary-primary-50, #E9E9F7);
+}
+
+.radio-option input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--Primary-primary-500, #1E22AA);
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  cursor: pointer;
+}
+
+.radio-option input[type="radio"]:checked {
+  background: var(--Primary-primary-500, #1E22AA);
+  border: 5px solid var(--Primary-primary-500, #1E22AA);
+}
+
+.radio-option label {
+  color: var(--Grey-grey-900, #585858);
+  font-size: 12px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 700;
+  text-transform: capitalize;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Filter Button */
+.filter-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 1rem;
+  background: var(--Primary-primary-500, #1E22AA);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Noto Kufi Arabic';
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.filter-button:hover {
+  background: #181b8a;
+}
+
+.filter-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-icon::before,
+.filter-icon::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1.5px solid var(--Grey-grey-50, #FAFAFA);
+}
+
+.filter-icon::before {
+  left: 6px;
+  top: 4px;
+}
+
+.filter-icon::after {
+  left: 12px;
+  top: 14px;
+}
+
+/* RTL Support */
+[dir="rtl"] .filter-title,
+[dir="rtl"] .filter-subtitle,
+[dir="rtl"] .product-info {
+  text-align: right;
+}
+
+[dir="rtl"] .part-type-selection {
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .radio-option {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .form-select {
+  text-align: right;
+  background-position: left 0.75rem center;
+  padding-right: 0.75rem;
+  padding-left: 2rem;
+}
+
+/* LTR Support */
+[dir="ltr"] .filter-title,
+[dir="ltr"] .filter-subtitle,
+[dir="ltr"] .product-info {
+  text-align: left;
+}
+
+[dir="ltr"] .part-type-selection {
+  justify-content: flex-start;
+}
+
+[dir="ltr"] .form-select {
+  text-align: left;
+  background-position: right 0.75rem center;
+  padding-left: 0.75rem;
+  padding-right: 2rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+  .sidebar-filter {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}

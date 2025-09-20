@@ -1,0 +1,159 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Direction-specific layouts */
+[dir="ltr"] .navbar {
+  flex-direction: row;
+}
+
+[dir="rtl"] .navbar {
+  flex-direction: row-reverse;
+}
+
+/* Navigation menu alignment */
+[dir="rtl"] .navbar-nav {
+  padding-right: 0;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+[dir="ltr"] .navbar-nav {
+  padding-left: 0;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* Language switcher positioning */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+[dir="rtl"] .lang-switcher {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+
+[dir="ltr"] .lang-switcher {
+  margin-left: 1rem;
+  margin-right: 0;
+}
+
+/* Language switcher select styling */
+.lang-switcher select {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+[dir="rtl"] .lang-switcher select {
+  font-family: 'Segoe UI', 'Tahoma', sans-serif;
+}
+
+/* Navigation items spacing */
+[dir="rtl"] .navbar-item {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+[dir="ltr"] .navbar-item {
+  margin-right: 1rem;
+  margin-left: 0;
+}
+
+/* Utility class adjustments for RTL */
+[dir="rtl"] .me-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"] .ms-2 {
+  margin-right: 0.5rem !important;
+  margin-left: 0 !important;
+}
+
+[dir="rtl"] .me-3 {
+  margin-left: 1rem !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"] .ms-3 {
+  margin-right: 1rem !important;
+  margin-left: 0 !important;
+}
+
+/* Brand positioning */
+[dir="rtl"] .navbar-brand {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+/* Mobile navigation styles */
+@media (max-width: 1199px) {
+  .navbar-collapse {
+    position: fixed;
+    top: 76px;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    padding: 20px;
+    transition: 0.3s;
+  }
+
+  [dir="ltr"] .navbar-collapse {
+    right: -100%;
+  }
+
+  [dir="rtl"] .navbar-collapse {
+    left: -100%;
+  }
+
+  .mobile-nav-active .navbar-collapse {
+    right: 0;
+  }
+
+  [dir="rtl"] .mobile-nav-active .navbar-collapse {
+    left: 0;
+    right: auto;
+  }
+}
+
+/* Navbar scrolled state */
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure icons maintain their original direction */
+[dir="rtl"] .keep-ltr {
+  direction: ltr;
+  display: inline-block;
+}
+
+/* Dropdown menus in RTL */
+[dir="rtl"] .dropdown-menu {
+  text-align: right;
+}
+
+[dir="rtl"] .dropdown-item {
+  text-align: right;
+}
+
+/* Icon spacing in RTL */
+[dir="rtl"] .nav-link i {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}

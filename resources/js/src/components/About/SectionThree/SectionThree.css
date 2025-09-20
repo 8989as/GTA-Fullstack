@@ -1,0 +1,120 @@
+.section-three {
+    overflow: hidden;
+    /* background-color: #f8f9fa; */
+}
+
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.image-wrapper img {
+    transition: transform 0.3s ease;
+}
+
+.image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.main-image {
+    height: 291px;
+    object-fit: cover;
+}
+
+.center-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.center-image-wrapper img {
+    height: 527px;
+    transition: transform 0.3s ease;
+}
+
+.center-image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.service-image-wrapper {
+    height: 263px;
+    overflow: hidden;
+}
+
+.service-image-wrapper img {
+    transition: transform 0.3s ease;
+}
+
+.service-image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.experience-box {
+    background: #1E22AA;
+    min-height: 216px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.experience-box:hover {
+    transform: translateY(-5px);
+}
+
+.experience-text {
+    color: #E9E9F7;
+    font-size: 40px;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin: 0;
+}
+
+/* RTL Support */
+[dir="rtl"] .row {
+    flex-direction: row-reverse;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1199.98px) {
+    .center-image-wrapper img {
+        height: 450px;
+    }
+    
+    .main-image {
+        height: 250px;
+    }
+    
+    .service-image-wrapper {
+        height: 220px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .experience-box {
+        min-height: 180px;
+    }
+    
+    .experience-text {
+        font-size: 32px;
+        line-height: 1.4;
+    }
+
+    .main-image,
+    .center-image-wrapper img,
+    .service-image-wrapper {
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .experience-box {
+        min-height: 160px;
+        padding: 1.5rem;
+    }
+}

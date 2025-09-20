@@ -1,0 +1,98 @@
+.steps-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('/assets/images/home/steps.png') no-repeat center center;
+    background-size: cover;
+  --primary-50: #E9E9F7;
+  --secondary-500: #DA291C;
+  --grey-300: #E0E0E0;
+}
+
+/* Text alignment based on direction */
+[dir="rtl"] .step-header {
+  text-align: right;
+}
+
+[dir="ltr"] .step-header {
+  text-align: left;
+}
+
+[dir="rtl"] .step-description {
+  text-align: right;
+}
+
+[dir="ltr"] .step-description {
+  text-align: left;
+}
+
+/* Maintain number direction in RTL */
+[dir="rtl"] .step-number {
+  direction: rtl;
+}
+
+/* Step order in RTL */
+[dir="rtl"] .row-cols-lg-5 > * {
+  order: 0;
+}
+
+.steps-title {
+  color: var(--primary-50);
+  font-size: 40px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0.5px;
+}
+
+.step-card {
+  background: rgba(0, 0, 0, 0.33) !important;
+  backdrop-filter: blur(10px);
+  border: none;
+  padding: 24px;
+}
+
+.step-number {
+  color: var(--secondary-500);
+  font-size: 16px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.step-title {
+  color: var(--primary-50);
+  font-size: 36px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 700;
+  line-height: 43.2px;
+}
+
+.step-description {
+  color: var(--grey-300);
+  font-size: 16px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 400;
+  line-height: 25.6px;
+  text-align: justify;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .steps-title {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  
+  .step-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .step-card {
+    margin-bottom: 1rem;
+  }
+}

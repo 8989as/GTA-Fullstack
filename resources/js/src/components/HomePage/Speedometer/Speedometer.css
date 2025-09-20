@@ -1,0 +1,18 @@
+.speedometer-container {
+  direction: ltr; /* Keep the gauges in LTR mode for proper rendering */
+}
+
+[dir="rtl"] .speedometer-text {
+  text-align: right;
+}
+
+[dir="rtl"] .speedometer-container h5,
+[dir="rtl"] .speedometer-container p {
+  text-align: center; /* Keep labels centered in both directions */
+}
+
+/* Ensure numbers maintain LTR direction even in RTL mode */
+[dir="rtl"] .speedometer-value {
+  direction: ltr;
+  display: inline-block;
+}

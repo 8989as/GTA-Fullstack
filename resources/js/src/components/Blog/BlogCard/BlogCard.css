@@ -1,0 +1,49 @@
+.blog-card {
+  border-radius: 8px;
+  border: 1px solid var(--Grey-grey-500, #D1D1D1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+}
+
+.blog-card .blog-card-img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.blog-card .badge {
+  backdrop-filter: blur(10px);
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 19.2px;
+}
+
+.blog-card .card-title {
+  color: var(--Primary-primary-500, #1E22AA);
+  font-size: 18px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 700;
+  line-height: 25.92px;
+}
+
+.blog-card .card-text {
+  color: var(--Grey-grey-900, #585858);
+  font-size: 14px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 400;
+  line-height: 21.28px;
+}
+
+/* RTL Specific Styles */
+.blog-card.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.blog-card.rtl .badge-container {
+  direction: rtl;
+}

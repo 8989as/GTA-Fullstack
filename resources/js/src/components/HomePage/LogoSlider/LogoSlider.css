@@ -1,0 +1,41 @@
+/* RTL-specific carousel control positioning */
+[dir="rtl"] .carousel-control-prev {
+  right: 0;
+  left: auto;
+}
+
+[dir="rtl"] .carousel-control-next {
+  left: 0;
+  right: auto;
+}
+
+/* Flip the control icons in RTL */
+[dir="rtl"] .carousel-control-prev-icon {
+  transform: rotate(180deg);
+}
+
+[dir="rtl"] .carousel-control-next-icon {
+  transform: rotate(180deg);
+}
+
+/* RTL-specific slide animation */
+[dir="rtl"] .carousel-item-next:not(.carousel-item-start) {
+  transform: translateX(-100%);
+}
+
+[dir="rtl"] .carousel-item-prev:not(.carousel-item-end) {
+  transform: translateX(100%);
+}
+
+/* Ensure logo alignment is consistent in both directions */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.logo-container img {
+  max-width: 100%;
+  height: auto;
+}

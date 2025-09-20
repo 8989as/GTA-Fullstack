@@ -1,0 +1,220 @@
+.reviews-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  direction: rtl;
+  min-height: 600px;
+  justify-content: center;
+}
+
+.reviews-title {
+  color: #1E22AA;
+  font-size: 40px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  width: 100%;
+}
+
+.reviews-slide {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.review-card {
+  width: 628px;
+  height: 444px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.review-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #D9D9D9;
+  border-radius: 8px;
+}
+
+.review-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+}
+
+.review-content {
+  width: 326px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 72px 24px;
+  background: rgba(0, 0, 0, 0.33);
+  backdrop-filter: blur(10px);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-bg {
+  width: 50px;
+  height: 42.31px;
+  position: absolute;
+  top: 3.85px;
+  background: #DA291C;
+}
+
+.service-title {
+  width: 208px;
+  text-align: right;
+  color: #E9E9F7;
+  font-size: 24px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.review-text {
+  text-align: justify;
+  color: #E0E0E0;
+  font-size: 16px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 400;
+  line-height: 25.6px;
+  margin-bottom: 32px;
+}
+
+.review-author {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.author-name {
+  color: #E9E9F7;
+  font-size: 18px;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-weight: 700;
+  line-height: 18px;
+  margin: 0;
+}
+
+.author-image {
+  width: 73px;
+  height: 73px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+/* Custom Carousel Indicators */
+.custom-indicators {
+  position: relative;
+  margin-top: 48px;
+  justify-content: center;
+  gap: 8px;
+  bottom: auto;
+}
+
+.custom-indicators button {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background-color: #D9D9D9;
+  border: none;
+  opacity: 1;
+}
+
+.custom-indicators button.active {
+  background-color: #9CB0C9;
+}
+
+/* Carousel Customization */
+.carousel-inner {
+  overflow: visible;
+}
+
+.carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
+.rating {
+  color: #FFD700;
+  font-size: 16px;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+/* Loading and Error states */
+.reviews-container:only-child {
+  color: #1E22AA;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* RTL specific adjustments */
+[dir="rtl"] .review-content {
+  text-align: right;
+}
+
+[dir="rtl"] .author-info {
+  align-items: flex-start;
+}
+
+[dir="rtl"] .carousel-control-prev {
+  right: auto;
+  left: -50px;
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .carousel-control-next {
+  left: auto;
+  right: -50px;
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .carousel-item-next:not(.carousel-item-start) {
+  transform: translateX(-100%);
+}
+
+[dir="rtl"] .carousel-item-prev:not(.carousel-item-end) {
+  transform: translateX(100%);
+}

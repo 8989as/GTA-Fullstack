@@ -1,0 +1,56 @@
+.branch-card {
+    transition: all 0.3s ease;
+    border: 1px solid #D1D1D1;
+    border-radius: 8px;
+}
+
+.branch-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.branch-icon {
+    width: 16px;
+    height: 19px;
+    background-color: #E15449;
+    display: inline-block;
+    margin-left: 13px;
+}
+
+.branch-title {
+    color: #1E22AA;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-weight: 700;
+}
+
+.branch-info {
+    color: #737373;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+}
+
+.map-container {
+    height: 310px;
+    width: 100%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.branch-heading {
+    width: 498px;
+    text-align: right;
+    color: #1E22AA;
+    font-size: 40px;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-weight: 700;
+    line-height: 49.60px;
+    word-wrap: break-word;
+}
+
+.branch-subheading {
+    text-align: right;
+    color: #585858;
+    font-size: 24px;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-weight: 400;
+    line-height: 34.56px;
+    word-wrap: break-word;
+}

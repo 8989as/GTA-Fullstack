@@ -1,0 +1,84 @@
+.hero-section {
+  display: flex;
+  width: 100%;
+  height: 46.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  gap: 0.625rem;
+  position: relative;
+  height: 100vh;
+  background: url("src/assets/images/home/hero.png") center center / cover
+    no-repeat;
+  padding-top: 100px; /* Add this line to create space for the fixed navbar */
+}
+
+.texz {
+  display: flex;
+  width: 44.0625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2.5rem;
+  position: absolute;
+  right: 5.125rem;
+  bottom: 5.625rem;
+}
+.hero-section .overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    338deg,
+    rgba(0, 0, 0, 0.6) 30%,
+    rgba(0, 0, 0, 0.3) 61%,
+    rgba(0, 0, 0, 0.15) 76%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 0;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section .container .ms-auto {
+  width: 100%;
+  max-width: 1441px;
+}
+
+/* Direction-based styles */
+[dir="rtl"] .texz {
+  right: 5.125rem;
+  left: auto;
+  align-items: flex-end;
+}
+
+[dir="ltr"] .texz {
+  left: 5.125rem;
+  right: auto;
+  align-items: flex-start;
+}
+
+[dir="rtl"] .hero-section {
+  align-items: flex-start;
+  text-align: right;
+}
+
+[dir="ltr"] .hero-section {
+  align-items: flex-start;
+  text-align: left;
+}
+
+[dir="rtl"] .justify-content-end {
+  justify-content: flex-start !important;
+}
+
+[dir="ltr"] .justify-content-end {
+  justify-content: flex-end !important;
+}

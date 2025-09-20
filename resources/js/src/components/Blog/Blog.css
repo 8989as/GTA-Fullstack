@@ -1,0 +1,9 @@
+.blog-section {
+  min-height: 100vh;
+  background-color: var(--Grey-grey-50, #F9F9F9);
+}
+
+/* RTL support for blog grid */
+[dir="rtl"] .blog-section .row {
+  direction: rtl;
+}
