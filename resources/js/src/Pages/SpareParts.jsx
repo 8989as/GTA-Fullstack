@@ -1,14 +1,11 @@
 import React from "react";
 import { useLanguage } from "../context";
-import PageHeader from "../components/PageHeader/PageHeader";
-import Sidebar from "../components/SpareParts/Sidebar/Sidebar";
-import Products from "../components/SpareParts/Products/Products";
-import RequestForm from "../components/SpareParts/RequestForm/RequestForm";
+import { PageHeader, Sidebar, Products, RequestForm } from "../components";
 
 const SpareParts = () => {
   const { language } = useLanguage();
   const breadcrumbs = [
-    { text: language === 'ar' ? 'الرئيسية' : 'Home', link: "/" }, 
+    { text: language === 'ar' ? 'الرئيسية' : 'Home', link: "/" },
     { text: language === 'ar' ? 'قطع الغيار' : 'Spare Parts' }
   ];
 
@@ -34,7 +31,7 @@ const SpareParts = () => {
             <RequestForm language={language} />
           </div>
         </div>
-        
+
       </div>
     </div>
   );

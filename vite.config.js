@@ -6,12 +6,24 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css', 
+                'resources/css/app.css',
                 'resources/js/main.jsx'
             ],
             refresh: true,
         }),
-        react(),
+        react({
+            jsxImportSource: 'react',
+            babel: {
+                plugins: [
+                    ['@babel/plugin-transform-react-jsx', {
+                        runtime: 'automatic',
+                        importSource: 'react'
+                    }]
+                ]
+            },
+            include: /\.(jsx|js|ts|tsx)$/,
+            exclude: /node_modules/,
+        }),
     ],
     resolve: {
         alias: {
@@ -23,6 +35,21 @@ export default defineConfig({
         port: 5173,
         hmr: {
             host: 'localhost',
+            port: 5173,
+        },
+        cors: true,
+        proxy: {
+            // Proxy API requests to Laravel during development
+            '/api': {
+                target: 'http://localhost:8000',
+                changeOrigin: true,
+                secure: false,
+            },
+            '/sanctum': {
+                target: 'http://localhost:8000',
+                changeOrigin: true,
+                secure: false,
+            },
         },
     },
     build: {

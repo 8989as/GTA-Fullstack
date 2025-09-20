@@ -57,6 +57,16 @@ Route::prefix('checkout')->group(function () {
     Route::post('/payment', [CheckoutController::class, 'processPayment']);
 });
 
+// Test route for React integration
+Route::get('/test', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Laravel API is working!',
+        'timestamp' => now()->toISOString(),
+        'server' => 'Laravel ' . app()->version(),
+    ]);
+});
+
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {

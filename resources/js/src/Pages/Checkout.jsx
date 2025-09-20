@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage, useCart, useAuth } from '../context';
 import { CheckoutService } from '../services';
-import PageHeader from '../components/PageHeader/PageHeader';
+import { PageHeader } from '../components';
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -50,13 +50,13 @@ const CheckoutPage = () => {
   const fetchCheckoutData = async () => {
     setLoading(true);
     const result = await CheckoutService.getCheckout();
-    
+
     if (result.success) {
       setCheckoutData(result.data);
     } else {
       setError(result.error);
     }
-    
+
     setLoading(false);
   };
 
@@ -66,7 +66,7 @@ const CheckoutPage = () => {
       ...prev,
       [name]: value
     }));
-    
+
     // Clear validation error for this field
     if (validationErrors[name]) {
       setValidationErrors(prev => ({
@@ -78,44 +78,44 @@ const CheckoutPage = () => {
 
   const validateShippingAddress = () => {
     const errors = {};
-    
+
     if (!shippingAddress.first_name.trim()) {
       errors.first_name = language === 'ar' ? 'الاسم الأول مطلوب' : 'First name is required';
     }
-    
+
     if (!shippingAddress.last_name.trim()) {
       errors.last_name = language === 'ar' ? 'اسم العائلة مطلوب' : 'Last name is required';
     }
-    
+
     if (!shippingAddress.line_one.trim()) {
       errors.line_one = language === 'ar' ? 'العنوان مطلوب' : 'Address is required';
     }
-    
+
     if (!shippingAddress.city.trim()) {
       errors.city = language === 'ar' ? 'المدينة مطلوبة' : 'City is required';
     }
-    
+
     if (!shippingAddress.postcode.trim()) {
       errors.postcode = language === 'ar' ? 'الرمز البريدي مطلوب' : 'Postal code is required';
     }
-    
+
     return errors;
   };
 
   const handleShippingSubmit = async (e) => {
     e.preventDefault();
-    
+
     const errors = validateShippingAddress();
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
       return;
     }
-    
+
     setProcessing(true);
     setError(null);
-    
+
     const result = await CheckoutService.setShippingAddress(shippingAddress);
-    
+
     if (result.success) {
       setStep(2);
       setValidationErrors({});
@@ -125,22 +125,22 @@ const CheckoutPage = () => {
         setValidationErrors(result.validationErrors);
       }
     }
-    
+
     setProcessing(false);
   };
 
   const handlePaymentSubmit = async (e) => {
     e.preventDefault();
-    
+
     setProcessing(true);
     setError(null);
-    
+
     const paymentData = {
       payment_method: paymentMethod,
     };
-    
+
     const result = await CheckoutService.processPayment(paymentData);
-    
+
     if (result.success) {
       // Clear cart and redirect to order confirmation
       await clearCart();
@@ -151,7 +151,7 @@ const CheckoutPage = () => {
         setValidationErrors(result.validationErrors);
       }
     }
-    
+
     setProcessing(false);
   };
 
@@ -177,16 +177,16 @@ const CheckoutPage = () => {
         image="/assets/images/page-header.png"
         alt="Checkout Header"
       />
-      
+
       <div className="container py-5">
         {/* Error Alert */}
         {error && (
           <div className="alert alert-danger alert-dismissible fade show mb-4" role="alert">
             <i className="bi bi-exclamation-triangle me-2"></i>
             {error}
-            <button 
-              type="button" 
-              className="btn-close" 
+            <button
+              type="button"
+              className="btn-close"
               onClick={() => setError(null)}
               aria-label="Close"
             ></button>
@@ -307,8 +307,8 @@ const CheckoutPage = () => {
                         )}
                       </div>
                     </div>
-                    <button 
-                      type="submit" 
+                    <button
+                      type="submit"
                       className="btn btn-primary"
                       disabled={processing}
                     >
@@ -353,7 +353,7 @@ const CheckoutPage = () => {
                             <div>
                               <h6 className="mb-1">{language === 'ar' ? 'الدفع عند الاستلام' : 'Cash on Delivery'}</h6>
                               <small className="text-muted">
-                                {language === 'ar' 
+                                {language === 'ar'
                                   ? 'ادفع نقداً عند استلام طلبك'
                                   : 'Pay with cash when you receive your order'}
                               </small>
@@ -362,10 +362,10 @@ const CheckoutPage = () => {
                         </label>
                       </div>
                     </div>
-                    
+
                     <div className="d-flex gap-2">
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         className="btn btn-outline-secondary"
                         onClick={() => setStep(1)}
                         disabled={processing}
@@ -373,8 +373,8 @@ const CheckoutPage = () => {
                         <i className="bi bi-arrow-left me-2"></i>
                         {language === 'ar' ? 'رجوع' : 'Back'}
                       </button>
-                      <button 
-                        type="submit" 
+                      <button
+                        type="submit"
                         className="btn btn-primary"
                         disabled={processing}
                       >
@@ -428,7 +428,7 @@ const CheckoutPage = () => {
                 <i className="bi bi-shield-check text-success fs-2 mb-2"></i>
                 <h6 className="mb-2">{language === 'ar' ? 'معاملة آمنة' : 'Secure Transaction'}</h6>
                 <small className="text-muted">
-                  {language === 'ar' 
+                  {language === 'ar'
                     ? 'معلوماتك محمية بأعلى معايير الأمان'
                     : 'Your information is protected with the highest security standards'}
                 </small>

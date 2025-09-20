@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context';
-import PageHeader from '../components/PageHeader/PageHeader';
+import { PageHeader } from '../components';
 
 const OrdersPage = () => {
   const { language } = useLanguage();
@@ -51,7 +51,7 @@ const OrdersPage = () => {
       completed: { class: 'success', text: language === 'ar' ? 'مكتمل' : 'Completed' },
       cancelled: { class: 'danger', text: language === 'ar' ? 'ملغي' : 'Cancelled' }
     };
-    
+
     const config = statusConfig[status] || statusConfig.pending;
     return <span className={`badge bg-${config.class}`}>{config.text}</span>;
   };
@@ -76,7 +76,7 @@ const OrdersPage = () => {
         image="/assets/images/page-header.png"
         alt="Orders Header"
       />
-      
+
       <div className="container py-5">
         {orders.length === 0 ? (
           <div className="text-center py-5">
@@ -85,7 +85,7 @@ const OrdersPage = () => {
               {language === 'ar' ? 'لا يوجد طلبات' : 'No Orders Found'}
             </h3>
             <p className="text-muted mb-4">
-              {language === 'ar' 
+              {language === 'ar'
                 ? 'لم تقم بأي طلبات بعد. ابدأ التسوق الآن!'
                 : "You haven't placed any orders yet. Start shopping now!"}
             </p>
@@ -102,7 +102,7 @@ const OrdersPage = () => {
                 {orders.length} {language === 'ar' ? 'طلب' : 'orders'}
               </span>
             </div>
-            
+
             <div className="row">
               {orders.map((order) => (
                 <div key={order.id} className="col-12 mb-4">
@@ -121,7 +121,7 @@ const OrdersPage = () => {
                         <div className="fw-bold text-primary mt-1">{order.total}</div>
                       </div>
                     </div>
-                    
+
                     <div className="card-body">
                       <div className="row">
                         <div className="col-md-8">
@@ -135,21 +135,21 @@ const OrdersPage = () => {
                             </div>
                           ))}
                         </div>
-                        
+
                         <div className="col-md-4 text-end">
                           <div className="d-flex flex-column gap-2">
                             <button className="btn btn-outline-primary btn-sm">
                               <i className="bi bi-eye me-2"></i>
                               {language === 'ar' ? 'عرض التفاصيل' : 'View Details'}
                             </button>
-                            
+
                             {order.status === 'completed' && (
                               <button className="btn btn-outline-secondary btn-sm">
                                 <i className="bi bi-arrow-repeat me-2"></i>
                                 {language === 'ar' ? 'إعادة الطلب' : 'Reorder'}
                               </button>
                             )}
-                            
+
                             {(order.status === 'pending' || order.status === 'processing') && (
                               <button className="btn btn-outline-danger btn-sm">
                                 <i className="bi bi-x-circle me-2"></i>
@@ -164,7 +164,7 @@ const OrdersPage = () => {
                 </div>
               ))}
             </div>
-            
+
             {/* Pagination would go here if needed */}
           </>
         )}

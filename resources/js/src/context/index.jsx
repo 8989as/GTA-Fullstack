@@ -1,15 +1,15 @@
 // Re-export all contexts and providers
-export { LanguageProvider, useLanguage } from './LanguageContext.jsx';
-export { AuthProvider, useAuth } from './AuthContext.jsx';
-export { CartProvider, useCart } from './CartContext.jsx';
-export { ProductsProvider, useProducts } from './ProductsContext.jsx';
+export { LanguageProvider, useLanguage } from './LanguageContext';
+export { AuthProvider, useAuth } from './AuthContext';
+export { CartProvider, useCart } from './CartContext';
+export { ProductsProvider, useProducts } from './ProductsContext';
 
 // Combined App Provider
 import React from 'react';
-import { LanguageProvider } from './LanguageContext.jsx';
-import { AuthProvider } from './AuthContext.jsx';
-import { CartProvider } from './CartContext.jsx';
-import { ProductsProvider } from './ProductsContext.jsx';
+import { LanguageProvider } from './LanguageContext';
+import { AuthProvider } from './AuthContext';
+import { CartProvider } from './CartContext';
+import { ProductsProvider } from './ProductsContext';
 
 export const AppProvider = ({ children }) => {
   return (

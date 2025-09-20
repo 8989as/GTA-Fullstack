@@ -12,7 +12,7 @@ export const LanguageProvider = ({ children }) => {
     // Load appropriate Bootstrap RTL/LTR CSS
     const bootstrapLink = document.getElementById('bootstrap-css');
     if (bootstrapLink) {
-      bootstrapLink.href = newLang === 'ar' 
+      bootstrapLink.href = newLang === 'ar'
         ? '/assets/css/bootstrap.rtl.min.css'
         : '/assets/css/bootstrap.min.css';
     }
@@ -21,20 +21,20 @@ export const LanguageProvider = ({ children }) => {
   // Update to properly load RTL Bootstrap CSS
   useEffect(() => {
     const loadBootstrapCSS = () => {
-      const bootstrapLink = document.getElementById('bootstrap-css') || 
+      const bootstrapLink = document.getElementById('bootstrap-css') ||
         document.createElement('link');
-      
+
       bootstrapLink.id = 'bootstrap-css';
       bootstrapLink.rel = 'stylesheet';
-      bootstrapLink.href = language === 'ar' 
-        ? '/assets/css/bootstrap.rtl.min.css' 
+      bootstrapLink.href = language === 'ar'
+        ? '/assets/css/bootstrap.rtl.min.css'
         : '/assets/css/bootstrap.min.css';
-      
+
       if (!document.getElementById('bootstrap-css')) {
         document.head.appendChild(bootstrapLink);
       }
     };
-    
+
     loadBootstrapCSS();
   }, [language]);
 

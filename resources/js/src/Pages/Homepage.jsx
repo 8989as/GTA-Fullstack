@@ -1,10 +1,13 @@
 import React from "react";
-import Header from "../components/HomePage/Header/Header";
-import LogoSlider from '../components/HomePage/LogoSlider/LogoSlider';
-import Services from "../components/HomePage/Services/Services";
-// import Reviews from "../components/HomePage/Reviews/Reviews";
-import SpeedometerDashboard from "../components/HomePage/Speedometer/Speedometer";
-import Steps from "../components/HomePage/Steps/Steps";
+import {
+  Header,
+  LogoSlider,
+  Services,
+  SpeedometerDashboard,
+  Steps,
+  HMRTest,
+  APITest
+} from "../components";
 
 const Homepage = () => {
   const BrandLogos = [
@@ -25,6 +28,8 @@ const Homepage = () => {
   return (
     <div>
       <Header />
+      <HMRTest />
+      <APITest />
       <LogoSlider logos={BrandLogos} interval={3000} itemsPerSlide={3} />
       <Services />
       {/* <Reviews /> */}

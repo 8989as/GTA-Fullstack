@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLanguage, useProducts, useCart } from '../context';
 import { ProductService } from '../services';
-import PageHeader from '../components/PageHeader/PageHeader';
+import { PageHeader } from '../components';
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -21,7 +21,7 @@ const ProductDetail = () => {
   const fetchProduct = async () => {
     setLoading(true);
     const result = await ProductService.getProduct(slug);
-    
+
     if (result.success) {
       setProduct(result.data);
       setError(null);
@@ -29,15 +29,15 @@ const ProductDetail = () => {
       setError(result.error);
       setProduct(null);
     }
-    
+
     setLoading(false);
   };
 
   const handleAddToCart = async () => {
     if (!product || !product.variants?.[0]) return;
-    
+
     const result = await addToCart(product.variants[0].id, quantity);
-    
+
     if (result.success) {
       setAddToCartMessage(language === 'ar' ? 'تم إضافة المنتج للسلة بنجاح' : 'Product added to cart successfully');
       setTimeout(() => setAddToCartMessage(''), 3000);
@@ -85,47 +85,47 @@ const ProductDetail = () => {
         image="/assets/images/page-header.png"
         alt="Product Header"
       />
-      
+
       <div className="container py-5">
         {addToCartMessage && (
           <div className="alert alert-success alert-dismissible fade show" role="alert">
             {addToCartMessage}
-            <button 
-              type="button" 
-              className="btn-close" 
+            <button
+              type="button"
+              className="btn-close"
               onClick={() => setAddToCartMessage('')}
             ></button>
           </div>
         )}
-        
+
         <div className="row">
           <div className="col-md-6">
             <div className="product-image">
-              <img 
+              <img
                 src={product.thumbnail || '/assets/images/placeholder-product.jpg'}
                 alt={product.name}
                 className="img-fluid rounded"
               />
             </div>
           </div>
-          
+
           <div className="col-md-6">
             <div className="product-details">
               <h1 className="mb-3">{product.name}</h1>
-              
+
               {product.description && (
                 <div className="mb-4">
                   <h5>{language === 'ar' ? 'الوصف' : 'Description'}</h5>
                   <p className="text-muted">{product.description}</p>
                 </div>
               )}
-              
+
               {product.variants?.[0] && (
                 <div className="mb-4">
                   <h4 className="text-primary mb-3">
                     {product.variants[0].price?.formatted || 'Price not available'}
                   </h4>
-                  
+
                   <div className="d-flex align-items-center gap-3 mb-4">
                     <label htmlFor="quantity" className="form-label mb-0">
                       {language === 'ar' ? 'الكمية:' : 'Quantity:'}
@@ -140,7 +140,7 @@ const ProductDetail = () => {
                       onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
                     />
                   </div>
-                  
+
                   <button
                     className="btn btn-primary btn-lg"
                     onClick={handleAddToCart}
@@ -160,7 +160,7 @@ const ProductDetail = () => {
                   </button>
                 </div>
               )}
-              
+
               {/* Product attributes */}
               {product.attributes && Object.keys(product.attributes).length > 0 && (
                 <div className="product-attributes">

@@ -1,16 +1,19 @@
 import React from "react";
-import Navbar from "../components/Navbar/Navbar";
-import PageHeader from "../components/PageHeader/PageHeader";
-import BlogComponent from "../components/Blog/Blog";
+import { useLanguage } from "../context";
+import { PageHeader, Blog as BlogComponent } from "../components";
 
 const BlogPage = () => {
-  const breadcrumbs = [{ text: "الرئيسية", link: "/" }, { text: "المدونة" }];
+  const { language } = useLanguage();
+
+  const breadcrumbs = [
+    { text: language === 'ar' ? 'الرئيسية' : 'Home', link: "/" },
+    { text: language === 'ar' ? 'المدونة' : 'Blog' }
+  ];
 
   return (
     <>
-      <Navbar />
       <PageHeader
-        title="المدونة"
+        title={language === 'ar' ? 'المدونة' : 'Blog'}
         breadcrumbs={breadcrumbs}
         image="assets/images/page-header.png"
         alt="Page Header"

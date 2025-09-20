@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage, useAuth } from '../context';
-import PageHeader from '../components/PageHeader/PageHeader';
+import { PageHeader } from '../components';
 
 const ProfilePage = () => {
   const { language } = useLanguage();
@@ -19,7 +19,7 @@ const ProfilePage = () => {
         image="/assets/images/page-header.png"
         alt="Profile Header"
       />
-      
+
       <div className="container py-5">
         <div className="row">
           <div className="col-md-4">
@@ -33,7 +33,7 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="col-md-8">
             <div className="card">
               <div className="card-header">
@@ -48,7 +48,7 @@ const ProfilePage = () => {
                     {user?.name}
                   </div>
                 </div>
-                
+
                 <div className="row mb-3">
                   <div className="col-sm-3">
                     <strong>{language === 'ar' ? 'البريد الإلكتروني:' : 'Email:'}</strong>
@@ -57,7 +57,7 @@ const ProfilePage = () => {
                     {user?.email}
                   </div>
                 </div>
-                
+
                 <div className="row mb-3">
                   <div className="col-sm-3">
                     <strong>{language === 'ar' ? 'تاريخ التسجيل:' : 'Member Since:'}</strong>
@@ -66,9 +66,9 @@ const ProfilePage = () => {
                     {user?.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
                   </div>
                 </div>
-                
+
                 <hr />
-                
+
                 <div className="d-flex gap-2">
                   <button className="btn btn-primary">
                     <i className="bi bi-pencil me-2"></i>
@@ -81,7 +81,7 @@ const ProfilePage = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="card mt-4">
               <div className="card-header">
                 <h5 className="mb-0">{language === 'ar' ? 'الإجراءات السريعة' : 'Quick Actions'}</h5>

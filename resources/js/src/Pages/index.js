@@ -1,0 +1,12 @@
+export { default as Homepage } from './Homepage';
+export { default as About } from './About';
+export { default as SpareParts } from './SpareParts';
+export { default as BlogPage } from './Blog';
+export { default as Contact } from './Contact';
+export { default as ProductDetail } from './ProductDetail';
+export { default as CartPage } from './Cart';
+export { default as CheckoutPage } from './Checkout';
+export { default as ProfilePage } from './Profile';
+export { default as OrdersPage } from './Orders';
+export { default as OrderConfirmation } from './OrderConfirmation';
+export { default as AuthPage } from './Auth';

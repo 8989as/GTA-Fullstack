@@ -1,20 +1,19 @@
 import React from "react";
-import Navbar from "../components/Navbar/Navbar";
-import PageHeader from "../components/PageHeader/PageHeader";
-import ContactForm from "../components/Contact/ContactForm";
-import BranchMap from "../components/Contact/BranchMap";
+import { useLanguage } from "../context";
+import { PageHeader, ContactForm, BranchMap } from "../components";
 
 const Contact = () => {
+  const { language } = useLanguage();
+
   const breadcrumbs = [
-    { text: "الرئيسية", link: "/" },
-    { text: "تواصل معنا" }
+    { text: language === 'ar' ? 'الرئيسية' : 'Home', link: "/" },
+    { text: language === 'ar' ? 'تواصل معنا' : 'Contact Us' }
   ];
 
   return (
     <>
-      <Navbar />
       <PageHeader
-        title="تواصل معنا"
+        title={language === 'ar' ? 'تواصل معنا' : 'Contact Us'}
         breadcrumbs={breadcrumbs}
         image="assets/images/page-header.png"
         alt="Contact Us Header"

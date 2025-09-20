@@ -1,23 +1,25 @@
 import React from "react";
-import Navbar from "../components/Navbar/Navbar";
-import PageHeader from "../components/PageHeader/PageHeader";
-import SectionOne from '../components/About/SectionOne/SectionOne';
-import SectionTwo from "../components/About/SectionTwo/SectionTwo";
-import SectionThree from "../components/About/SectionThree/SectionThree";
-import BranchesSection from "../components/About/Branches/Branches";
-
+import { useLanguage } from "../context";
+import {
+  PageHeader,
+  SectionOne,
+  SectionTwo,
+  SectionThree,
+  BranchesSection
+} from "../components";
 
 const About = () => {
+  const { language } = useLanguage();
+
   const breadcrumbs = [
-    { text: "الرئيسية", link: "/" },
-    { text: "من نحن" }
+    { text: language === 'ar' ? 'الرئيسية' : 'Home', link: "/" },
+    { text: language === 'ar' ? 'من نحن' : 'About Us' }
   ];
 
   return (
     <>
-      <Navbar />
       <PageHeader
-        title="من نحن"
+        title={language === 'ar' ? 'من نحن' : 'About Us'}
         breadcrumbs={breadcrumbs}
         image="assets/images/page-header.png"
         alt="Page Header"

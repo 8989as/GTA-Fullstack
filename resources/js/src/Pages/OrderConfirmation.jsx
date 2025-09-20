@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLanguage, useAuth } from '../context';
 import { OrderService } from '../services';
-import PageHeader from '../components/PageHeader/PageHeader';
+import { PageHeader } from '../components';
 import './OrderConfirmation.css';
 
 const OrderConfirmation = () => {
@@ -33,7 +33,7 @@ const OrderConfirmation = () => {
   const fetchOrder = async () => {
     setLoading(true);
     const result = await OrderService.getOrder(orderId);
-    
+
     if (result.success) {
       setOrder(result.data);
       setError(null);
@@ -41,13 +41,13 @@ const OrderConfirmation = () => {
       setError(result.error);
       setOrder(null);
     }
-    
+
     setLoading(false);
   };
 
   const handleDownloadInvoice = async () => {
     const result = await OrderService.getOrderInvoice(orderId);
-    
+
     if (result.success) {
       // Create blob and download
       const blob = new Blob([result.data], { type: 'application/pdf' });
@@ -70,7 +70,7 @@ const OrderConfirmation = () => {
       delivered: { class: 'success', text: language === 'ar' ? 'تم التسليم' : 'Delivered' },
       cancelled: { class: 'danger', text: language === 'ar' ? 'ملغي' : 'Cancelled' }
     };
-    
+
     const config = statusConfig[status] || statusConfig.pending;
     return <span className={`badge bg-${config.class} fs-6`}>{config.text}</span>;
   };
@@ -96,7 +96,7 @@ const OrderConfirmation = () => {
           image="/assets/images/page-header.png"
           alt="Error Header"
         />
-        
+
         <div className="container py-5">
           <div className="text-center">
             <i className="bi bi-exclamation-triangle text-danger display-1 mb-4"></i>
@@ -104,11 +104,11 @@ const OrderConfirmation = () => {
               {language === 'ar' ? 'لم يتم العثور على الطلب' : 'Order Not Found'}
             </h3>
             <p className="text-muted mb-4">
-              {error || (language === 'ar' 
+              {error || (language === 'ar'
                 ? 'الطلب المطلوب غير موجود أو تم حذفه'
                 : 'The requested order does not exist or has been removed')}
             </p>
-            <button 
+            <button
               className="btn btn-primary"
               onClick={() => navigate('/orders')}
             >
@@ -129,7 +129,7 @@ const OrderConfirmation = () => {
         image="/assets/images/page-header.png"
         alt="Order Confirmation Header"
       />
-      
+
       <div className="container py-5">
         {/* Success Message */}
         <div className="row mb-5">
@@ -141,19 +141,19 @@ const OrderConfirmation = () => {
                   {language === 'ar' ? 'تم إتمام طلبك بنجاح!' : 'Order Placed Successfully!'}
                 </h2>
                 <p className="text-muted fs-5 mb-4">
-                  {language === 'ar' 
+                  {language === 'ar'
                     ? 'شكراً لك على طلبك. سيتم التواصل معك قريباً لتأكيد التفاصيل.'
                     : 'Thank you for your order. We will contact you soon to confirm the details.'}
                 </p>
                 <div className="d-flex justify-content-center gap-3 flex-wrap">
-                  <button 
+                  <button
                     className="btn btn-outline-primary"
                     onClick={() => navigate('/orders')}
                   >
                     <i className="bi bi-list-ul me-2"></i>
                     {language === 'ar' ? 'عرض جميع الطلبات' : 'View All Orders'}
                   </button>
-                  <button 
+                  <button
                     className="btn btn-outline-secondary"
                     onClick={handleDownloadInvoice}
                   >
@@ -212,8 +212,8 @@ const OrderConfirmation = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               {item.purchasable?.thumbnail && (
-                                <img 
-                                  src={item.purchasable.thumbnail} 
+                                <img
+                                  src={item.purchasable.thumbnail}
                                   alt={item.purchasable.name}
                                   className="order-item-image me-3"
                                 />
@@ -273,33 +273,33 @@ const OrderConfirmation = () => {
                   <span>{language === 'ar' ? 'المجموع الفرعي:' : 'Subtotal:'}</span>
                   <span>{order.sub_total?.formatted}</span>
                 </div>
-                
+
                 {order.tax_total && (
                   <div className="d-flex justify-content-between mb-2">
                     <span>{language === 'ar' ? 'الضريبة:' : 'Tax:'}</span>
                     <span>{order.tax_total.formatted}</span>
                   </div>
                 )}
-                
+
                 {order.shipping_total && (
                   <div className="d-flex justify-content-between mb-2">
                     <span>{language === 'ar' ? 'الشحن:' : 'Shipping:'}</span>
                     <span>{order.shipping_total.formatted}</span>
                   </div>
                 )}
-                
+
                 <hr />
                 <div className="d-flex justify-content-between">
                   <strong>{language === 'ar' ? 'الإجمالي:' : 'Total:'}</strong>
                   <strong className="text-primary fs-5">{order.total?.formatted}</strong>
                 </div>
-                
+
                 <div className="mt-3 pt-3 border-top">
                   <small className="text-muted">
                     <i className="bi bi-credit-card me-2"></i>
-                    {language === 'ar' ? 'طريقة الدفع:' : 'Payment Method:'} 
+                    {language === 'ar' ? 'طريقة الدفع:' : 'Payment Method:'}
                     <span className="ms-1">
-                      {order.payment_method === 'cash_on_delivery' 
+                      {order.payment_method === 'cash_on_delivery'
                         ? (language === 'ar' ? 'الدفع عند الاستلام' : 'Cash on Delivery')
                         : order.payment_method
                       }
@@ -324,13 +324,13 @@ const OrderConfirmation = () => {
                       {language === 'ar' ? 'تأكيد الطلب' : 'Order Confirmation'}
                     </h6>
                     <small className="text-muted">
-                      {language === 'ar' 
+                      {language === 'ar'
                         ? 'سيتم التواصل معك خلال 24 ساعة لتأكيد الطلب'
                         : 'We will contact you within 24 hours to confirm your order'}
                     </small>
                   </div>
                 </div>
-                
+
                 <div className="d-flex align-items-start mb-3">
                   <i className="bi bi-box-seam text-primary me-3 mt-1"></i>
                   <div>
@@ -338,13 +338,13 @@ const OrderConfirmation = () => {
                       {language === 'ar' ? 'تحضير الطلب' : 'Order Preparation'}
                     </h6>
                     <small className="text-muted">
-                      {language === 'ar' 
+                      {language === 'ar'
                         ? 'سيتم تحضير طلبك وتجهيزه للشحن'
                         : 'Your order will be prepared and packaged for shipping'}
                     </small>
                   </div>
                 </div>
-                
+
                 <div className="d-flex align-items-start">
                   <i className="bi bi-truck text-primary me-3 mt-1"></i>
                   <div>
@@ -352,7 +352,7 @@ const OrderConfirmation = () => {
                       {language === 'ar' ? 'الشحن والتسليم' : 'Shipping & Delivery'}
                     </h6>
                     <small className="text-muted">
-                      {language === 'ar' 
+                      {language === 'ar'
                         ? 'سيتم شحن طلبك وتسليمه في الموعد المحدد'
                         : 'Your order will be shipped and delivered as scheduled'}
                     </small>

@@ -13,8 +13,8 @@ use Illuminate\support\Facades\Route;
 |
 */
 
-// Serve React SPA for all routes
+// Serve React SPA for all routes except API routes
 // The React Router will handle client-side routing
 Route::get('/{any}', function () {
     return view('app');
-})->where('any', '.*');
+})->where('any', '^(?!api).*$');
