@@ -94,7 +94,7 @@ class CartController extends Controller
         $cart = CartSession::current();
         
         if (!$cart) {
-            return response()->json(['message' => 'Cart not found'], 404);
+            return response()->json(['message' => 'Cart not found at all'], 404);
         }
 
         $line = $cart->lines->where('id', $lineId)->first();
