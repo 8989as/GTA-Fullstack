@@ -31,6 +31,23 @@
   font-weight: 600;
   font-family: 'Noto Kufi Arabic';
   text-align: center;
+  z-index: 2;
+}
+
+/* Out of Stock Badge */
+.out-of-stock-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 3px 7px;
+  background: var(--Grey-grey-700, #949494);
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Noto Kufi Arabic';
+  text-align: center;
+  z-index: 2;
 }
 
 /* Action Buttons */
@@ -107,6 +124,14 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.original-price {
+  font-size: 14px;
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 400;
 }
 
 .price-value {
@@ -125,10 +150,23 @@
   font-family: 'Noto Kufi Arabic';
   font-weight: 600;
   line-height: 24px;
+  transition: all 0.2s ease;
 }
 
-.add-to-cart-btn:hover {
+.add-to-cart-btn:hover:not(:disabled) {
   background: #181b8a;
+}
+
+.add-to-cart-btn:disabled {
+  background: var(--Grey-grey-500, #D1D1D1);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Loading and disabled states */
+.add-to-cart-btn .spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
 }
 
 /* RTL Support */
@@ -137,6 +175,11 @@
 }
 
 [dir="rtl"] .discount-badge {
+  right: 16px;
+  left: auto;
+}
+
+[dir="rtl"] .out-of-stock-badge {
   right: 16px;
   left: auto;
 }
@@ -178,6 +221,11 @@
   right: auto;
 }
 
+[dir="ltr"] .out-of-stock-badge {
+  left: 16px;
+  right: auto;
+}
+
 [dir="ltr"] .action-buttons {
   right: 16px;
   left: auto;
@@ -192,10 +240,51 @@
   margin-left: 0;
 }
 
+/* Results summary */
+.results-summary {
+  padding: 1rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.results-summary h5 {
+  color: var(--Primary-primary-500, #1E22AA);
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 700;
+}
+
+.results-summary .badge {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+/* Pagination */
+.pagination .page-link {
+  color: var(--Primary-primary-500, #1E22AA);
+  border-color: var(--Grey-grey-500, #D1D1D1);
+  font-family: 'Noto Kufi Arabic';
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--Primary-primary-500, #1E22AA);
+  border-color: var(--Primary-primary-500, #1E22AA);
+}
+
+.pagination .page-link:hover {
+  color: white;
+  background-color: var(--Primary-primary-500, #1E22AA);
+  border-color: var(--Primary-primary-500, #1E22AA);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .price-value {
     font-size: 32px;
     line-height: 46px;
+  }
+  
+  .results-summary .d-flex {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
   }
 }

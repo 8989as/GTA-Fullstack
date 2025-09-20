@@ -1,0 +1,43 @@
+.cart-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-icon {
+  font-size: 1.5rem;
+  color: var(--Primary-primary-500, #1E22AA);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cart-icon:hover {
+  color: #181b8a;
+}
+
+.cart-badge {
+  top: -5px;
+  right: -10px;
+  font-size: 0.75rem;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-total {
+  font-family: 'Noto Kufi Arabic';
+  font-weight: 600;
+  color: var(--Primary-primary-500, #1E22AA);
+}
+
+.total-amount {
+  font-size: 14px;
+}
+
+/* RTL Support */
+[dir="rtl"] .cart-badge {
+  right: auto;
+  left: -10px;
+}

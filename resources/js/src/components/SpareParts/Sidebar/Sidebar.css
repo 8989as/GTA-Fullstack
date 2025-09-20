@@ -19,6 +19,19 @@
   line-height: 12px;
 }
 
+/* Search Box */
+.position-relative input.form-control {
+  padding-right: 2.5rem;
+  border: 1px solid #E8E8E8;
+  border-radius: 6px;
+  font-family: 'Noto Kufi Arabic';
+}
+
+[dir="rtl"] .position-relative input.form-control {
+  padding-left: 2.5rem;
+  padding-right: 0.75rem;
+}
+
 /* Car Brand Grid */
 .car-brands-grid {
   display: grid;
@@ -137,7 +150,6 @@
 .filter-button {
   width: 100%;
   padding: 12px;
-  margin-top: 1rem;
   background: var(--Primary-primary-500, #1E22AA);
   color: white;
   border: none;
@@ -151,6 +163,46 @@
 
 .filter-button:hover {
   background: #181b8a;
+}
+
+/* Filter Actions */
+.filter-actions {
+  margin-top: 1rem;
+}
+
+.btn-outline-primary {
+  border-color: var(--Primary-primary-500, #1E22AA);
+  color: var(--Primary-primary-500, #1E22AA);
+  font-family: 'Noto Kufi Arabic';
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--Primary-primary-500, #1E22AA);
+  border-color: var(--Primary-primary-500, #1E22AA);
+}
+
+/* Clear filters button */
+.btn-link.text-danger {
+  color: var(--Error-error-500, #DA2222) !important;
+  text-decoration: none;
+}
+
+.btn-link.text-danger:hover {
+  color: #b91c1c !important;
+}
+
+/* Price range inputs */
+.form-control[type="number"] {
+  padding: 8px 12px;
+  border: 1px solid #E8E8E8;
+  border-radius: 6px;
+  font-family: 'Noto Kufi Arabic';
+  font-size: 14px;
+}
+
+.form-control[type="number"]:focus {
+  border-color: var(--Primary-primary-500, #1E22AA);
+  box-shadow: 0 0 0 0.2rem rgba(30, 34, 170, 0.25);
 }
 
 .filter-icon {

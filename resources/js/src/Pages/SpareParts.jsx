@@ -1,4 +1,5 @@
 import React from "react";
+import { useLanguage } from "../context";
 import Navbar from "../components/Navbar/Navbar";
 import PageHeader from "../components/PageHeader/PageHeader";
 import Sidebar from "../components/SpareParts/Sidebar/Sidebar";
@@ -6,14 +7,17 @@ import Products from "../components/SpareParts/Products/Products";
 import RequestForm from "../components/SpareParts/RequestForm/RequestForm";
 
 const SpareParts = () => {
-  const language = "ar"; // Set to ar for Arabic RTL layout
-  const breadcrumbs = [{ text: "الرئيسية", link: "/" }, { text: "قطع الغيار" }];
+  const { language } = useLanguage();
+  const breadcrumbs = [
+    { text: language === 'ar' ? 'الرئيسية' : 'Home', link: "/" }, 
+    { text: language === 'ar' ? 'قطع الغيار' : 'Spare Parts' }
+  ];
 
   return (
     <div dir={language === "ar" ? "rtl" : "ltr"}>
       <Navbar />
       <PageHeader
-        title="قطع الغيار"
+        title={language === 'ar' ? 'قطع الغيار' : 'Spare Parts'}
         breadcrumbs={breadcrumbs}
         image="assets/images/page-header.png"
         alt="Page Header"

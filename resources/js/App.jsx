@@ -4,18 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
-import { useLanguage } from './context/LanguageContext';
+import { AppProvider, useLanguage } from './src/context';
 import { Suspense, lazy } from 'react';
 
 // Lazy load components
-const Homepage = lazy(() => import('./Pages/Homepage'));
-const About = lazy(() => import('./Pages/About'));
-const SpareParts = lazy(() => import('./Pages/SpareParts'));
-const BlogPage = lazy(() => import('./Pages/Blog'));
-const Contact = lazy(() => import('./Pages/Contact'));
+const Homepage = lazy(() => import('./src/Pages/Homepage'));
+const About = lazy(() => import('./src/Pages/About'));
+const SpareParts = lazy(() => import('./src/Pages/SpareParts'));
+const BlogPage = lazy(() => import('./src/Pages/Blog'));
+const Contact = lazy(() => import('./src/Pages/Contact'));
 
 // Import Shared Layout Components
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './src/components/Navbar/Navbar';
 // import Footer from './components/Footer/Footer'; // Assuming this exists
 
 // Loading Component
@@ -27,8 +27,9 @@ const LoadingSpinner = () => (
   </div>
 );
 
-function App() {
-  const { language, toggleLanguage } = useLanguage();
+// App Content Component
+const AppContent = () => {
+  const { language } = useLanguage();
 
   return (
     <Router>
@@ -86,10 +87,16 @@ function App() {
             element={<NotFound language={language} />} 
           />
         </Routes>
-        
-        {/* <Footer /> */}
       </div>
     </Router>
+  );
+};
+
+function App() {
+  return (
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
   );
 }
 
