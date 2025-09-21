@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
 import { CartService } from '../services';
 
 // Cart Context
@@ -151,9 +151,9 @@ export const CartProvider = ({ children }) => {
   // Cart actions
   const fetchCart = async () => {
     dispatch({ type: CART_ACTIONS.FETCH_CART_START });
-    
+
     const result = await CartService.getCart();
-    
+
     if (result.success) {
       dispatch({
         type: CART_ACTIONS.FETCH_CART_SUCCESS,
@@ -165,15 +165,15 @@ export const CartProvider = ({ children }) => {
         payload: result.error,
       });
     }
-    
+
     return result;
   };
 
   const addToCart = async (variantId, quantity = 1) => {
     dispatch({ type: CART_ACTIONS.ADD_TO_CART_START });
-    
+
     const result = await CartService.addToCart(variantId, quantity);
-    
+
     if (result.success) {
       dispatch({
         type: CART_ACTIONS.ADD_TO_CART_SUCCESS,
@@ -188,15 +188,15 @@ export const CartProvider = ({ children }) => {
         payload: result.error,
       });
     }
-    
+
     return result;
   };
 
   const updateCartItem = async (lineId, quantity) => {
     dispatch({ type: CART_ACTIONS.UPDATE_CART_ITEM_START });
-    
+
     const result = await CartService.updateCartItem(lineId, quantity);
-    
+
     if (result.success) {
       dispatch({
         type: CART_ACTIONS.UPDATE_CART_ITEM_SUCCESS,
@@ -211,15 +211,15 @@ export const CartProvider = ({ children }) => {
         payload: result.error,
       });
     }
-    
+
     return result;
   };
 
   const removeFromCart = async (lineId) => {
     dispatch({ type: CART_ACTIONS.REMOVE_FROM_CART_START });
-    
+
     const result = await CartService.removeFromCart(lineId);
-    
+
     if (result.success) {
       dispatch({
         type: CART_ACTIONS.REMOVE_FROM_CART_SUCCESS,
@@ -234,15 +234,15 @@ export const CartProvider = ({ children }) => {
         payload: result.error,
       });
     }
-    
+
     return result;
   };
 
   const clearCart = async () => {
     dispatch({ type: CART_ACTIONS.CLEAR_CART_START });
-    
+
     const result = await CartService.clearCart();
-    
+
     if (result.success) {
       dispatch({
         type: CART_ACTIONS.CLEAR_CART_SUCCESS,
@@ -257,7 +257,7 @@ export const CartProvider = ({ children }) => {
         payload: result.error,
       });
     }
-    
+
     return result;
   };
 

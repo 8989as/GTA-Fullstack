@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 const LanguageContext = createContext();
 
@@ -9,6 +9,7 @@ export const LanguageProvider = ({ children }) => {
     setLanguage(newLang);
     document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = newLang;
+
     // Load appropriate Bootstrap RTL/LTR CSS
     const bootstrapLink = document.getElementById('bootstrap-css');
     if (bootstrapLink) {

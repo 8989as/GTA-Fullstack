@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
 import Cart from '../Pages/Cart';
 import { validateQuantity, validateCart } from '../utils/cartValidation';
 
@@ -14,20 +14,28 @@ jest.mock('../utils/cartValidation', () => ({
 
 // Mock the services
 jest.mock('../services', () => require('../__mocks__/services'));
+
+// Mock the context hooks
+jest.mock('../context/CartContext', () => ({
+  useCart: jest.fn()
+}));
+
 jest.mock('../context/AuthContext', () => ({
-  useAuth: () => ({
-    user: null,
-    login: jest.fn(),
-    logout: jest.fn(),
-    loading: false
-  })
+  useAuth: jest.fn()
 }));
+
 jest.mock('../context/LanguageContext', () => ({
-  useLanguage: () => ({
-    language: 'en',
-    setLanguage: jest.fn()
-  })
+  useLanguage: jest.fn()
 }));
+
+// Import the mocked functions
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
+
+const mockUseCart = useCart;
+const mockUseAuth = useAuth;
+const mockUseLanguage = useLanguage;
 
 // Mock fetch
 global.fetch = jest.fn();
@@ -45,7 +53,17 @@ global.localStorage = localStorageMock;
 delete window.location;
 window.location = { href: '' };
 
-const mockCart = {
+
+
+// Test wrapper
+const TestWrapper = ({ children }) => (
+  <BrowserRouter>
+    {children}
+  </BrowserRouter>
+);
+
+// Test data helpers
+const createTestCart = (overrides = {}) => ({
   lines: [
     {
       id: 1,
@@ -62,14 +80,9 @@ const mockCart = {
   ],
   total: { value: 200, formatted: '$200.00' },
   sub_total: { value: 200, formatted: '$200.00' },
-  tax_total: { value: 0, formatted: '$0.00' }
-};
-
-const CartWrapper = ({ children }) => (
-  <BrowserRouter>
-    {children}
-  </BrowserRouter>
-);
+  tax_total: { value: 0, formatted: '$0.00' },
+  ...overrides
+});
 
 describe('Cart Component', () => {
   beforeEach(() => {
@@ -78,18 +91,63 @@ describe('Cart Component', () => {
     localStorageMock.setItem.mockClear();
     validateQuantity.mockClear();
     validateCart.mockClear();
+
+    // Set up default validation mocks
+    validateQuantity.mockReturnValue({ isValid: true, errors: [] });
+    validateCart.mockReturnValue({ isValid: true, errors: [], warnings: [] });
+
+    // Set up default mock context values
+    mockUseCart.mockReturnValue({
+      cart: { lines: [], total: { value: 0, formatted: '$0.00' } },
+      loading: false,
+      error: null,
+      updateQuantity: jest.fn(),
+      removeItem: jest.fn(),
+      addItem: jest.fn(),
+      clearCart: jest.fn(),
+      refreshCart: jest.fn(),
+      clearMessage: jest.fn(),
+      getCartItemsCount: jest.fn(() => 0),
+      getFormattedCartTotal: jest.fn(() => '$0.00'),
+    });
+
+    mockUseAuth.mockReturnValue({
+      user: null,
+      login: jest.fn(),
+      logout: jest.fn(),
+      loading: false,
+      isAuthenticated: false,
+    });
+
+    mockUseLanguage.mockReturnValue({
+      language: 'en',
+      setLanguage: jest.fn(),
+      isRTL: false,
+    });
   });
 
   test('renders cart with items', async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ cart: mockCart })
+    const testCart = createTestCart();
+
+    // Mock the cart context to return the test cart
+    mockUseCart.mockReturnValue({
+      cart: testCart,
+      loading: false,
+      error: null,
+      updateQuantity: jest.fn(),
+      removeItem: jest.fn(),
+      addItem: jest.fn(),
+      clearCart: jest.fn(),
+      refreshCart: jest.fn(),
+      clearMessage: jest.fn(),
+      getCartItemsCount: jest.fn(() => 2),
+      getFormattedCartTotal: jest.fn(() => '$200.00'),
     });
 
     render(
-      <CartWrapper>
+      <TestWrapper>
         <Cart />
-      </CartWrapper>
+      </TestWrapper>
     );
 
     await waitFor(() => {
@@ -99,15 +157,27 @@ describe('Cart Component', () => {
   });
 
   test('renders empty cart message when no items', async () => {
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ cart: { lines: [], total: { value: 0, formatted: '$0.00' } } })
+    const emptyCart = { lines: [], total: { value: 0, formatted: '$0.00' } };
+
+    // Mock the cart context to return empty cart
+    mockUseCart.mockReturnValue({
+      cart: emptyCart,
+      loading: false,
+      error: null,
+      updateQuantity: jest.fn(),
+      removeItem: jest.fn(),
+      addItem: jest.fn(),
+      clearCart: jest.fn(),
+      refreshCart: jest.fn(),
+      clearMessage: jest.fn(),
+      getCartItemsCount: jest.fn(() => 0),
+      getFormattedCartTotal: jest.fn(() => '$0.00'),
     });
 
     render(
-      <CartWrapper>
+      <TestWrapper>
         <Cart />
-      </CartWrapper>
+      </TestWrapper>
     );
 
     await waitFor(() => {
@@ -123,7 +193,7 @@ describe('Cart Component', () => {
       })
       .mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ 
+        json: async () => ({
           cart: {
             ...mockCart,
             lines: [{
@@ -165,9 +235,9 @@ describe('Cart Component', () => {
       json: async () => ({ cart: mockCart })
     });
 
-    validateQuantity.mockReturnValue({ 
-      isValid: false, 
-      errors: ['Quantity exceeds available stock'] 
+    validateQuantity.mockReturnValue({
+      isValid: false,
+      errors: ['Quantity exceeds available stock']
     });
 
     render(
@@ -195,7 +265,7 @@ describe('Cart Component', () => {
       })
       .mockResolvedValueOnce({
         ok: false,
-        json: async () => ({ 
+        json: async () => ({
           message: 'Insufficient stock available',
           errors: { stock: ['Only 5 items available'] }
         })
@@ -258,8 +328,8 @@ describe('Cart Component', () => {
       json: async () => ({ cart: mockCart })
     });
 
-    validateCart.mockReturnValue({ 
-      isValid: false, 
+    validateCart.mockReturnValue({
+      isValid: false,
       errors: ['Cart validation failed'],
       warnings: []
     });
@@ -291,8 +361,8 @@ describe('Cart Component', () => {
       json: async () => ({ cart: mockCart })
     });
 
-    validateCart.mockReturnValue({ 
-      isValid: true, 
+    validateCart.mockReturnValue({
+      isValid: true,
       errors: [],
       warnings: ['Some items may have limited availability']
     });
@@ -325,8 +395,8 @@ describe('Cart Component', () => {
       json: async () => ({ cart: mockCart })
     });
 
-    validateCart.mockReturnValue({ 
-      isValid: true, 
+    validateCart.mockReturnValue({
+      isValid: true,
       errors: [],
       warnings: []
     });
@@ -355,8 +425,8 @@ describe('Cart Component', () => {
       json: async () => ({ cart: mockCart })
     });
 
-    validateCart.mockReturnValue({ 
-      isValid: false, 
+    validateCart.mockReturnValue({
+      isValid: false,
       errors: ['Invalid quantity for some items'],
       warnings: []
     });
@@ -378,8 +448,8 @@ describe('Cart Component', () => {
       json: async () => ({ cart: mockCart })
     });
 
-    validateCart.mockReturnValue({ 
-      isValid: true, 
+    validateCart.mockReturnValue({
+      isValid: true,
       errors: [],
       warnings: ['Some items may be out of stock soon']
     });

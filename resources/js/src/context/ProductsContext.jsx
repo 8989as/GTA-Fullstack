@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
 import { ProductService } from '../services';
 import { parseFiltersFromURL, buildURLFromFilters, useURLParams } from '../utils/urlState';
 
@@ -149,23 +149,23 @@ export const ProductsProvider = ({ children }) => {
   // Products actions
   const fetchProducts = async () => {
     dispatch({ type: PRODUCTS_ACTIONS.FETCH_PRODUCTS_START });
-    
+
     const params = {
       page: state.currentPage,
       per_page: 12,
       sort_by: state.sortBy,
       ...state.filters,
     };
-    
+
     // Remove empty filter values
     Object.keys(params).forEach(key => {
       if (params[key] === '' || params[key] === null || params[key] === undefined) {
         delete params[key];
       }
     });
-    
+
     const result = await ProductService.getProducts(params);
-    
+
     if (result.success) {
       dispatch({
         type: PRODUCTS_ACTIONS.FETCH_PRODUCTS_SUCCESS,
@@ -180,7 +180,7 @@ export const ProductsProvider = ({ children }) => {
         payload: result.error,
       });
     }
-    
+
     return result;
   };
 
@@ -191,15 +191,15 @@ export const ProductsProvider = ({ children }) => {
     }
 
     dispatch({ type: PRODUCTS_ACTIONS.SEARCH_PRODUCTS_START });
-    
+
     const params = {
       page: 1,
       per_page: 12,
       ...state.filters,
     };
-    
+
     const result = await ProductService.searchProducts(query, params);
-    
+
     if (result.success) {
       dispatch({
         type: PRODUCTS_ACTIONS.SEARCH_PRODUCTS_SUCCESS,
@@ -215,7 +215,7 @@ export const ProductsProvider = ({ children }) => {
         payload: result.error,
       });
     }
-    
+
     return result;
   };
 
@@ -264,14 +264,14 @@ export const ProductsProvider = ({ children }) => {
   const getFilterSummary = () => {
     const activeFilters = [];
     const { brand, model, year, part_type, price_min, price_max } = state.filters;
-    
+
     if (brand) activeFilters.push(`Brand: ${brand}`);
     if (model) activeFilters.push(`Model: ${model}`);
     if (year) activeFilters.push(`Year: ${year}`);
     if (part_type !== 'original') activeFilters.push(`Type: ${part_type}`);
     if (price_min) activeFilters.push(`Min Price: $${price_min}`);
     if (price_max) activeFilters.push(`Max Price: $${price_max}`);
-    
+
     return activeFilters;
   };
 

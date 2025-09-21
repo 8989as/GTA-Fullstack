@@ -11,19 +11,7 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-        react({
-            jsxImportSource: 'react',
-            babel: {
-                plugins: [
-                    ['@babel/plugin-transform-react-jsx', {
-                        runtime: 'automatic',
-                        importSource: 'react'
-                    }]
-                ]
-            },
-            include: /\.(jsx|js|ts|tsx)$/,
-            exclude: /node_modules/,
-        }),
+        react(),
     ],
     resolve: {
         alias: {

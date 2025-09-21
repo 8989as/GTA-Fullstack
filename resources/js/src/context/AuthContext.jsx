@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
 import { AuthService } from '../services';
 
 // Auth Context
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
     const initializeAuth = () => {
       const token = AuthService.getStoredToken();
       const user = AuthService.getStoredUser();
-      
+
       if (token && user) {
         dispatch({
           type: AUTH_ACTIONS.SET_USER,
@@ -136,9 +136,9 @@ export const AuthProvider = ({ children }) => {
   // Auth actions
   const login = async (credentials) => {
     dispatch({ type: AUTH_ACTIONS.LOGIN_START });
-    
+
     const result = await AuthService.login(credentials);
-    
+
     if (result.success) {
       dispatch({
         type: AUTH_ACTIONS.LOGIN_SUCCESS,
@@ -153,15 +153,15 @@ export const AuthProvider = ({ children }) => {
         },
       });
     }
-    
+
     return result;
   };
 
   const register = async (userData) => {
     dispatch({ type: AUTH_ACTIONS.REGISTER_START });
-    
+
     const result = await AuthService.register(userData);
-    
+
     if (result.success) {
       dispatch({
         type: AUTH_ACTIONS.REGISTER_SUCCESS,
@@ -176,7 +176,7 @@ export const AuthProvider = ({ children }) => {
         },
       });
     }
-    
+
     return result;
   };
 

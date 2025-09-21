@@ -1,11 +1,10 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 import { AppProvider, useLanguage, useAuth } from './src/context';
-import { Suspense, lazy } from 'react';
 
 // Lazy load components
 const Homepage = lazy(() => import('./src/Pages/Homepage'));

@@ -5,7 +5,6 @@ export { CartProvider, useCart } from './CartContext';
 export { ProductsProvider, useProducts } from './ProductsContext';
 
 // Combined App Provider
-import React from 'react';
 import { LanguageProvider } from './LanguageContext';
 import { AuthProvider } from './AuthContext';
 import { CartProvider } from './CartContext';
